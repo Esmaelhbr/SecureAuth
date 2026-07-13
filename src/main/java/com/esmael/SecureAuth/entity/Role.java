@@ -1,6 +1,6 @@
 package com.esmael.SecureAuth.entity;
 
-import org.hibernate.annotations.AnyDiscriminatorImplicitValues.Strategy;
+
 
 import com.esmael.SecureAuth.entity.enums.RoleName;
 
