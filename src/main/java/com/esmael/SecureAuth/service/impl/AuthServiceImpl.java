@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.esmael.SecureAuth.dto.auth.RegisterRequest;
 import com.esmael.SecureAuth.dto.auth.RegisterResponse;
 import com.esmael.SecureAuth.entity.enums.RoleName;
+import com.esmael.SecureAuth.exception.EmailAlreadyExistsException;
 import com.esmael.SecureAuth.repository.RoleRepository;
 import com.esmael.SecureAuth.repository.UserRepository;
 import com.esmael.SecureAuth.service.AuthService;
@@ -25,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public RegisterResponse register(RegisterRequest request) {
 		if(userRepository.existsByEmail(request.getEmail())) {
-			throw new RuntimeException("Email already exits");
+			throw new EmailAlreadyExistsException("Email already exists");
 		}
 		Role role = roleRepository.findByName(RoleName.ROLE_USER)
 				.orElseThrow(()-> new RuntimeException("Default role not found"));
